@@ -11,32 +11,53 @@ const getPokemon = async (id) => {
     makePokemonCard(res.data)
 };
 // official-artwork
-getPokemon(4)
+getPokemon(1)
 
 
 
 const makePokemonCard = (res) => {
+    const name = res.name[0].toUpperCase() + res.name.slice(1);
+    const type1 = res.types[0].type.name[0].toUpperCase() + res.types[0].type.name.slice(1);
+    const type2 = res.types[1].type.name[0].toUpperCase() + res.types[1].type.name.slice(1);
+
+
+
     const pokemonCardFront = document.createElement('div');
     pokemonCardFront.classList.add('pokemonCardFront');
 
     const pokemonCardBack = document.createElement('div');
     pokemonCardBack.classList.add('pokemonCardBack');
-
+    
     const pokemonName = document.createElement('span');
     pokemonName.classList.add('pokemonName')
-    pokemonName.innerText = res.name;
+    pokemonName.innerText = name;
 
     const pokemonType1 = document.createElement('span');
-    pokemonType1.classList.add('pokemonType')
-    pokemonType1.innerText = res.types[0].type.name;
+    pokemonType1.classList.add(`pokemonType${type1}`)
+    console.log(pokemonType1.classList)
+    
+    pokemonType1.innerText = type1;
+
+    
 
     // if pokemon has a second type then append that type
     if(res.types[1]) {
         const pokemonType2 = document.createElement('span');
-        pokemonType2.classList.add('pokemonType')
-        pokemonType2.innerText = res.types[1].type.name;
+        pokemonType2.classList.add(`pokemonType${type2}`)
+        pokemonType2.innerText = type2;
         pokemonCardBack.appendChild(pokemonType2);
     }
+
+    // applies selector class name based on type
+    // if (pokemonType1.innerText === "grass") {
+    //     console.log("Green")
+    //     pokemonType1.classList.add('pokemonTypeGrass')
+    // }
+
+    // function checkType (type) {
+    //    return pokemonType1.classList.add(`pokemonType${type}`)
+    // }
+    // checkType(res.types[0].type.name)
 
     const newImg = document.createElement('img');
     newImg.src = `${baseURL}${baseModifier(res.id)}.png`
