@@ -1,0 +1,40 @@
+body {
+    font-family: 'Open Sans';
+    background-color: rgb(251, 251, 251);
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 4rem;
+    font-weight: 100;
+    color: grey;
+}
+
+.pokemon {
+    display: inline-block;
+    border-radius: 10px;
+    margin: 20px;
+    height: 330px;
+    width: 250px;
+    box-shadow: 0px 3px 4px 3px #DDD;
+    background-color: white;
+}
+
+.pokemon img {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0 auto;
+}
+
+span {
+    font-weight: 400;
+    line-height: 65px;
+    font-size: 1.1rem;
+    color: lightgrey;
+}
+
+#container {
+    text-align: center;
+}
