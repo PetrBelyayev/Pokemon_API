@@ -1,5 +1,5 @@
 body {
-    font-family: 'Open Sans';
+    font-family: 'Oxanium';
     background-color: rgb(251, 251, 251);
 }
 
@@ -34,18 +34,25 @@ h1 {
     vertical-align: top;
 }
 
-.pokemon img {
+.pokemonName {
     display: block;
-    width: 200px;
-    margin: 20px auto 0 auto;
+    color: grey;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 25px 0 20px;
 }
 
-span {
-    margin: 15px;
-    font-weight: 400;
-    line-height: 65px;
-    font-size: 1.1rem;
+.pokemonImg {
+    display: block;
+    width: 200px;
+    margin: 0 auto 20px;
+}
+
+.pokemonId {
     color: grey;
+    border: solid grey 1px;
+    border-radius: 20px;
+    padding: 5px 15px;
 }
 
 #container {
@@ -53,15 +60,54 @@ span {
 }
 
 .pokemonTypeGrass {
-    color: green;
-    border: green solid 1px;
-    border-radius: 50px;
-    padding: 5px;
+    display: inline-flex;
+    color: black;
+    border-radius: 5px;
+    background-color: #9bcc50;
+    width: 80px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 5px;
 }
 
 .pokemonTypePoison {
-    color: darkmagenta;
-    border: darkmagenta solid 1px;
-    border-radius: 50px;
-    padding: 5px;
+    display: inline-flex;
+    color: white;
+    border-radius: 5px;
+    background-color: #b87fca;
+    width: 80px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 5px;
 }
+
+.pokemonTypeFire {
+    display: inline-flex;
+    color: black;
+    border-radius: 5px;
+    background-color: #fd7d24;
+    width: 80px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 5px;
+
+}
+
+/*GROUND = linear-gradient(180deg, #f7de3f 50%, #ab9842 50%); */
+/* FLYING = linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%); */
+/* NORMAL */
+/* FAIRY */
+/* BUG */
+/* WATER */
+/* FIGHTING */
+/* PSYCHIC */
+/* ROCK */
+/* STEEL */
+/* GHOST */
+/* ICE */
+/* ELECTRIC */
+/* DRAGON */
+/* DARK */
