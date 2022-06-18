@@ -179,3 +179,8 @@ const makePokemonCard = (res) => {
 function feetAndInches(decimal) {
     return Math.floor(decimal) + "'" + Math.round((12 * (decimal - Math.floor(decimal)))) +'"';
   }
+
+// converts decimeters to feet
+function decToFoot(dec) {
+    return dec/3.048
+}
