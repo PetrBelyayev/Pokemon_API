@@ -11,6 +11,7 @@ const getPokemon = async (id) => {
     // console.log(res.data.abilities[0].ability)
     console.log(res.data)
     makePokemonCard(res.data)
+    
 };
 
 // function allGen() {
@@ -21,11 +22,21 @@ const getPokemon = async (id) => {
 
 // allGen()
 
-getPokemon(3)
+getPokemon(151)
+
 
 
 
 const makePokemonCard = (res) => {
+
+    // converts decimeters to feet
+    let decimeterToFeet = res.height/3.048
+    console.log(decimeterToFeet)
+    
+
+    let pokemonTotalHeight = Math.floor(decimeterToFeet) + "'" + Math.round((12 * (decimeterToFeet - Math.floor(decimeterToFeet)))) +'"';
+    console.log(pokemonTotalHeight)
+
     const name = res.name[0].toUpperCase() + res.name.slice(1);
     const type1 = res.types[0].type.name[0].toUpperCase() + res.types[0].type.name.slice(1);
     
@@ -64,6 +75,11 @@ const makePokemonCard = (res) => {
     pokemonImg.src = `${baseURL}${baseModifier(res.id)}.png`
     pokemonImg.classList.add('pokemonImg')
     pokemonImg.style.background = `-webkit-radial-gradient(center, var(--${type1}) 0%, #ffffff 70%)`;
+
+    // pokemon height after conversion
+    const pokemonHeight = document.createElement('span');
+    pokemonHeight.classList.add('pokemonHeight');
+    pokemonHeight.innerText = `Height ${pokemonTotalHeight}`;
     
     const dualTypes = ['dragon', 'flying', 'ground']
     // ground and flying type use a 2 color gradient for labels which will conflict with variable "type1"- use this to apply a single type color gradient from root
@@ -92,10 +108,17 @@ const makePokemonCard = (res) => {
         pokemonCardBack.appendChild(pokemonType2);
     }
 
+    
+    pokemonCardBack.appendChild(pokemonHeight);
     container.appendChild(pokemonCardFront);
     container.appendChild(pokemonCardBack);
 }
 
+
+// converts total feet in decimal to feet and inches
+let feet = function feetAndInches(decimal) {
+    return Math.floor(decimal) + "'" + Math.round((12 * (decimal - Math.floor(decimal)))) +'"';
+  }
 
 
 
@@ -175,12 +198,3 @@ const makePokemonCard = (res) => {
 
 // gen5()
 
-// converts total feet in decimal to feet and inches
-function feetAndInches(decimal) {
-    return Math.floor(decimal) + "'" + Math.round((12 * (decimal - Math.floor(decimal)))) +'"';
-  }
-
-// converts decimeters to feet
-function decToFoot(dec) {
-    return dec/3.048
-}
