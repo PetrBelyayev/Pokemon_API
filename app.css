@@ -84,6 +84,18 @@ h1 {
     width: 50px;
 }
 
+.pokemonHeight {
+    display: block;
+    word-spacing: 25px;
+}
+
+.pokemonHeight:before {
+    color: red;
+    content: "Height";
+    margin-right: 15px;
+    border: solid 1px red;
+}
+
 #container {
     text-align: center;
 }
@@ -97,19 +109,11 @@ h1 {
     align-items: center;
     margin: 50px 5px;
 }
-
-.pokemonTypeGrass {
-    color: black;
-}
-
-.pokemonTypePoison {
+.pokemonTypeWater {
     color: white;
 }
 
-.pokemonTypeFire {
-    color: black;
-}
 
-.pokemonTypeWater {
+.pokemonTypePoison, .pokemonTypeDark, .pokemonTypeBug, .pokemonTypeDragon {
     color: white;
 }
