@@ -61,4 +61,4 @@ let pokemonWeakness = {
     //     console.log('True', type1)
     // } else {
     // console.log('Does not exist')
-    // }
+    // }  
