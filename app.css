@@ -56,32 +56,10 @@ h1 {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
-    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
 }
 
-.card:hover {
-    cursor: pointer;
-}
 
-.card:hover .pokemonImg {
-    animation: bounce .6s linear;
-}
-
-@keyframes bounce {
-    20%, 50%, 80%, to {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    70% {
-        transform: translateY(-15px);
-    }
-    90% {
-        transform: translateY(-4px);
-    }
-    
-}
 
 .pokemonCardFront {
     position: absolute;
@@ -173,3 +151,28 @@ h1 {
 }
 
 
+@media screen and (min-width: 800px) {
+    .card:hover {
+        cursor: pointer;
+    }
+    
+    .card:hover .pokemonImg {
+        animation: bounce .6s linear;
+    }
+    
+    @keyframes bounce {
+        20%, 50%, 80%, to {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-30px);
+        }
+        70% {
+            transform: translateY(-15px);
+        }
+        90% {
+            transform: translateY(-4px);
+        }
+        
+    }
+}

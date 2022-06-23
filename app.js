@@ -12,15 +12,40 @@ const getPokemon = async (id) => {
     
     makePokemonCard(res.data, res2.data)
     // console.log(res2.data.id)
+
 };
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 5; i++) {
+    for(let i = 1; i <= 151; i++) {
         await getPokemon(i);
     }
 }
 
 fetchPokemons()
 // getPokemon(80)
+
+let selectedCard;
+
+container.onclick = function(event) {
+    let target = event.target;
+    while (target != this) {
+        if (target.classList == 'card') {
+            flipCard(target);
+            return;
+        }
+    target = target.parentNode;
+    }
+}
+
+function flipCard(node) {
+    if (selectedCard) {
+        console.log(selectedCard)
+    selectedCard.classList.remove('flipCard');
+    }
+    selectedCard = node;
+    console.log(selectedCard)
+    selectedCard.classList.add('flipCard');
+}
+
 
 const makePokemonCard = (res, res2) => {
     // pokemon card front and back
@@ -94,14 +119,8 @@ const makePokemonCard = (res, res2) => {
     card.appendChild(pokemonCardBack);
     cardContainer.appendChild(card);
     container.appendChild(cardContainer);
-
-
-
-    card.addEventListener('click', flipCard);
-    function flipCard() {
-        card.classList.toggle('flipCard');
-    }
- 
+    // event handler 
+    
 }
 
 
