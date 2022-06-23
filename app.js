@@ -4,6 +4,9 @@ const baseURL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
 // base modifier pad image api and the number on card
 let baseModifier = (number) => (number <= 999 ? `00${number}` .slice(-3): number);
 // pokemon api
+
+
+
 const getPokemon = async (id) => {
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
@@ -12,8 +15,8 @@ const getPokemon = async (id) => {
     
     makePokemonCard(res.data, res2.data)
     // console.log(res2.data.id)
-
 };
+
 const fetchPokemons = async () => {
     for(let i = 1; i <= 151; i++) {
         await getPokemon(i);
@@ -23,32 +26,31 @@ const fetchPokemons = async () => {
 fetchPokemons()
 // getPokemon(80)
 
-let selectedCard;
+// let selectedCard;
 
-container.onclick = function(event) {
-    let target = event.target;
-    while (target != this) {
-        if (target.classList == 'card') {
-            flipCard(target);
-            return;
-        }
-    target = target.parentNode;
-    }
-}
+// container.onclick = function(event) {
+//     let target = event.target;
+//     while (target != this) {
+//         if (target.classList == 'card') {
+//             flipCard(target);
+//             return;
+//         }
+//     target = target.parentNode;
+//     }
+// }
 
-function flipCard(node) {
-    if (selectedCard) {
-        console.log(selectedCard)
-    selectedCard.classList.remove('flipCard');
-    }
-    selectedCard = node;
-    console.log(selectedCard)
-    selectedCard.classList.add('flipCard');
-}
+// function flipCard(node) {
+//     if (selectedCard) {
+//     selectedCard.classList.remove('flipCard');
+//     }
+//     selectedCard = node;
+//     selectedCard.classList.add('flipCard');
+// }
 
 
 const makePokemonCard = (res, res2) => {
     // pokemon card front and back
+    
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('cardContainer');
     const card = document.createElement('div');
@@ -120,7 +122,18 @@ const makePokemonCard = (res, res2) => {
     cardContainer.appendChild(card);
     container.appendChild(cardContainer);
     // event handler 
+
     
+
+    card.addEventListener('click', flipCard)
+   
+    window.addEventListener('scroll', () => {
+        card.classList.remove('flipCard')
+    })
+
+    function flipCard() {
+        card.classList.toggle('flipCard')
+    }
 }
 
 
