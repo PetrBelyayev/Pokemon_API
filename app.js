@@ -13,18 +13,23 @@ const getPokemon = async (id) => {
     const res = await axios.get(pokemonDataUrl);
     const res2 = await axios.get(pokemonSpeciesUrl);
     
-    makePokemonCard(res.data, res2.data)
-    // console.log(res2.data.id)
+    
+    const pokemonEvolution = res2.data.evolution_chain.url
+    const res3 = await axios.get(`${pokemonEvolution}`);
+    console.log(res3.data)
+    makePokemonCard(res.data, res2.data, res3.data)
 };
 
+
+
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 151; i++) {
+    for(let i = 152; i <= 152; i++) {
         await getPokemon(i);
     }
 }
 
 fetchPokemons()
-// getPokemon(80)
+
 
 // let selectedCard;
 
@@ -50,7 +55,6 @@ fetchPokemons()
 
 const makePokemonCard = (res, res2) => {
     // pokemon card front and back
-    
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('cardContainer');
     const card = document.createElement('div');
@@ -88,6 +92,9 @@ const makePokemonCard = (res, res2) => {
     typeContainer.appendChild(pokemonType2);
     // pokemon image (using a seperate api)
     const pokemonImg = document.createElement('img');
+    pokemonImg.src = `${baseURL}${baseModifier(res.id)}.png`
+    pokemonImg.classList.add('pokemonImg')
+    pokemonImg.style.background = `-webkit-radial-gradient(center, var(--${type1}) 0%, #ffffff 70%)`;
     // ground, flying, dragon type use a 2 color gradient for labels which will conflict with variable "type1"- use this to apply a single type color gradient from root
     if(res.types[0].type.name === 'dragon' ||
     res.types[0].type.name ==='flying' ||
@@ -96,11 +103,8 @@ const makePokemonCard = (res, res2) => {
         pokemonImg.style.background = 
         `-webkit-radial-gradient(center, var(--${type1}Single) 0%, #ffffff 70%)`;
     }
-    pokemonImg.src = `${baseURL}${baseModifier(res.id)}.png`
-    pokemonImg.classList.add('pokemonImg')
-    pokemonImg.style.background = `-webkit-radial-gradient(center, var(--${type1}) 0%, #ffffff 70%)`;
     // pokemon height with conversion
-    let decimeterToFeet = res.height/3.048
+    let decimeterToFeet = (res.height/3.048)
     let pokemonTotalHeight = Math.floor(decimeterToFeet) + "'" + Math.round((12 * (decimeterToFeet - Math.floor(decimeterToFeet)))) +'"';
     const pokemonHeight = document.createElement('span');
     pokemonHeight.classList.add('pokemonHeight');
@@ -110,7 +114,6 @@ const makePokemonCard = (res, res2) => {
     pokemonCategory.classList.add('pokemonCategory');
     pokemonCategory.innerText = res2.genera[7].genus.replace('Pokémon', '');
  // appended components go here
-    
     pokemonCardFront.appendChild(pokemonId);
     pokemonCardFront.appendChild(pokemonImg);
     pokemonCardFront.appendChild(pokemonName);
@@ -122,18 +125,28 @@ const makePokemonCard = (res, res2) => {
     cardContainer.appendChild(card);
     container.appendChild(cardContainer);
     // event handler 
-
-    
-
     card.addEventListener('click', flipCard)
-   
     window.addEventListener('scroll', () => {
         card.classList.remove('flipCard')
     })
-
     function flipCard() {
         card.classList.toggle('flipCard')
     }
+  
+
+        let allWeakness = {
+        Grass: ['Fire', 'Ice', 'Flying', 'Psychic'],
+        Normal: ['Fighting'],
+        Fire: ['Rock', 'Ground', 'Water'],
+        Water: ['Grass', 'Electric'],
+    };
+
+        if(allWeakness.hasOwnProperty(type1))  {
+            console.log(allWeakness[type1])
+            
+        } else {
+        console.log('Does not exist')
+        }  
 }
 
 
