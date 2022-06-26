@@ -22,9 +22,6 @@
     --DragonSingle: #f16e57;
   }
 
-  /*GROUND = linear-gradient(180deg, #f7de3f 50%, #ab9842 50%); */
-/* FLYING = linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%); */
-
 body {
     font-family: 'Oxanium';
     background-color: rgb(251, 251, 251);
@@ -58,8 +55,6 @@ h1 {
     transform-style: preserve-3d;
     -webkit-transition: all 0.3s ease;
 }
-
-
 
 .pokemonCardFront {
     position: absolute;
@@ -98,24 +93,19 @@ h1 {
 .pokemonImg {
     display: block;
     width: 200px;
-    margin: 0 auto 20px;
+    margin: 0 auto 15px;
     border-radius: 500px;
 }
-
-
 
 .pokemonName {
     display: block;
     font-size: 20px;
     font-weight: 400;
-    margin: 0 0 5px 33px;
+    margin-left: 33px;
 }
 
-.typeContainer {
-    display: flex;
-    margin: 0 auto;
-    width: 185px;
-    justify-content:space-between;
+.weakTypeContainer {
+    text-align: left;
 }
 
 .pokemonTypeGrass, .pokemonTypePoison, .pokemonTypeFire, .pokemonTypeGround, .pokemonTypeIce, .pokemonTypeElectric, .pokemonTypeFlying, .pokemonTypeFighting, .pokemonTypeNormal,.pokemonTypeWater, .pokemonTypeBug, .pokemonTypeFairy, .pokemonTypeDark, .pokemonTypeDragon, .pokemonTypeSteel, .pokemonTypePsychic, .pokemonTypeRock, .pokemonTypeGhost {
@@ -127,9 +117,10 @@ h1 {
     line-height: 20px;
     color: white;
     text-align: center;
+    margin: 5px -25px 5px 32px;
 }
 
-.pokemonTypeGrass, .pokemonTypeGround, .pokemonTypeIce, .pokemonTypeElectric, .pokemonTypeFlying, .pokemonTypeNormal, .pokemonTypeFairy, .pokemonTypeSteel {
+.pokemonTypeGround, .pokemonTypeFlying, .pokemonTypeDragon {
     color: black;
 }
 
@@ -149,7 +140,6 @@ h1 {
 .pokemonCategory {
     margin-right: 15px;
 }
-
 
 @media screen and (min-width: 800px) {
     .card:hover {

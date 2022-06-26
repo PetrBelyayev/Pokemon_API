@@ -1,11 +1,11 @@
+import { allWeakness } from "./weakness.js";
+
 const container = document.querySelector('#container');
 // pokemon image api
 const baseURL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
 // base modifier pad image api and the number on card
 let baseModifier = (number) => (number <= 999 ? `00${number}` .slice(-3): number);
 // pokemon api
-
-
 
 const getPokemon = async (id) => {
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -20,38 +20,13 @@ const getPokemon = async (id) => {
     makePokemonCard(res.data, res2.data, res3.data)
 };
 
-
-
 const fetchPokemons = async () => {
-    for(let i = 152; i <= 152; i++) {
+    for(let i = 1; i <= 151; i++) {
         await getPokemon(i);
     }
 }
 
 fetchPokemons()
-
-
-// let selectedCard;
-
-// container.onclick = function(event) {
-//     let target = event.target;
-//     while (target != this) {
-//         if (target.classList == 'card') {
-//             flipCard(target);
-//             return;
-//         }
-//     target = target.parentNode;
-//     }
-// }
-
-// function flipCard(node) {
-//     if (selectedCard) {
-//     selectedCard.classList.remove('flipCard');
-//     }
-//     selectedCard = node;
-//     selectedCard.classList.add('flipCard');
-// }
-
 
 const makePokemonCard = (res, res2) => {
     // pokemon card front and back
@@ -75,8 +50,6 @@ const makePokemonCard = (res, res2) => {
     // pokemon types
     const type1 = res.types[0].type.name[0].toUpperCase() + res.types[0].type.name.slice(1);
     const pokemonType1 = document.createElement('span');
-    const typeContainer = document.createElement('div');
-    typeContainer.classList.add('typeContainer');
     pokemonType1.classList.add(`pokemonType${type1}`);
     pokemonType1.innerText = type1;
     pokemonType1.style.background = `var(--${type1})`;
@@ -88,9 +61,6 @@ const makePokemonCard = (res, res2) => {
     pokemonType2.style.background = `var(--${type2})`
     pokemonType2.innerText = type2;
     }
-    typeContainer.appendChild(pokemonType1);
-    typeContainer.appendChild(pokemonType2);
-    // pokemon image (using a seperate api)
     const pokemonImg = document.createElement('img');
     pokemonImg.src = `${baseURL}${baseModifier(res.id)}.png`
     pokemonImg.classList.add('pokemonImg')
@@ -113,13 +83,30 @@ const makePokemonCard = (res, res2) => {
     const pokemonCategory = document.createElement('span');
     pokemonCategory.classList.add('pokemonCategory');
     pokemonCategory.innerText = res2.genera[7].genus.replace('Pokémon', '');
+
+    allWeakness
+    const weakTypeContainer = document.createElement('div');
+    weakTypeContainer.classList.add('weakTypeContainer');
+    let hasWeakType = allWeakness[type1]
+
+    hasWeakType.forEach(function (hasWeakType) {
+        let weakTypeLabel = document.createElement('span')
+        weakTypeLabel.innerHTML = hasWeakType
+        weakTypeLabel.classList.add(`pokemonType${hasWeakType}`)
+        weakTypeLabel.style.background = `var(--${hasWeakType})`
+        weakTypeContainer.appendChild(weakTypeLabel)
+    })
+
  // appended components go here
     pokemonCardFront.appendChild(pokemonId);
     pokemonCardFront.appendChild(pokemonImg);
     pokemonCardFront.appendChild(pokemonName);
-    pokemonCardFront.appendChild(typeContainer)
+    pokemonCardFront.appendChild(pokemonType1);
+    pokemonCardFront.appendChild(pokemonType2);
+    // pokemonCardFront.appendChild(typeContainer)
     pokemonCardBack.appendChild(pokemonHeight);
     pokemonCardBack.appendChild(pokemonCategory);
+    pokemonCardBack.appendChild(weakTypeContainer);
     card.appendChild(pokemonCardFront);
     card.appendChild(pokemonCardBack);
     cardContainer.appendChild(card);
@@ -132,21 +119,4 @@ const makePokemonCard = (res, res2) => {
     function flipCard() {
         card.classList.toggle('flipCard')
     }
-  
-
-        let allWeakness = {
-        Grass: ['Fire', 'Ice', 'Flying', 'Psychic'],
-        Normal: ['Fighting'],
-        Fire: ['Rock', 'Ground', 'Water'],
-        Water: ['Grass', 'Electric'],
-    };
-
-        if(allWeakness.hasOwnProperty(type1))  {
-            console.log(allWeakness[type1])
-            
-        } else {
-        console.log('Does not exist')
-        }  
 }
-
-
