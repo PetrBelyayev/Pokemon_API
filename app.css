@@ -124,21 +124,37 @@ h1 {
     color: black;
 }
 
-.pokemonHeight {
+
+.categoryTitleContainer {
+    margin-left: 32px;
+    border: red solid 1px;
+    text-align: left;
+    font-size: 14px;
+
+}
+
+.categoryTitle {
+    font-weight: 600;
+}
+
+.heightTitle {
+    font-weight: 600;
+}
+
+.heightTitleContainer {
+    margin-left: 32px;
+    border: red solid 1px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.weaknessTitle {
     display: block;
-    word-spacing: 25px;
-    text-align: center;
-    margin-top: 50px;
-}
-
-.pokemonHeight:before {
-    color: red;
-    content: "Height";
-    margin-right: 15px;
-}
-
-.pokemonCategory {
-    margin-right: 15px;
+    margin-left: 32px;
+    border: red solid 1px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 @media screen and (min-width: 800px) {

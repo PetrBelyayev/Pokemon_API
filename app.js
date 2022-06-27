@@ -21,7 +21,7 @@ const getPokemon = async (id) => {
 };
 
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 151; i++) {
+    for(let i = 1; i <= 3; i++) {
         await getPokemon(i);
     }
 }
@@ -83,7 +83,8 @@ const makePokemonCard = (res, res2) => {
     const pokemonCategory = document.createElement('span');
     pokemonCategory.classList.add('pokemonCategory');
     pokemonCategory.innerText = res2.genera[7].genus.replace('Pokémon', '');
-
+    // pokemon weakness
+    
     allWeakness
     const weakTypeContainer = document.createElement('div');
     weakTypeContainer.classList.add('weakTypeContainer');
@@ -94,23 +95,61 @@ const makePokemonCard = (res, res2) => {
         weakTypeLabel.innerHTML = hasWeakType
         weakTypeLabel.classList.add(`pokemonType${hasWeakType}`)
         weakTypeLabel.style.background = `var(--${hasWeakType})`
-        weakTypeContainer.appendChild(weakTypeLabel)
+        weakTypeContainer.append(weakTypeLabel)
     })
 
- // appended components go here
-    pokemonCardFront.appendChild(pokemonId);
-    pokemonCardFront.appendChild(pokemonImg);
-    pokemonCardFront.appendChild(pokemonName);
-    pokemonCardFront.appendChild(pokemonType1);
-    pokemonCardFront.appendChild(pokemonType2);
-    // pokemonCardFront.appendChild(typeContainer)
-    pokemonCardBack.appendChild(pokemonHeight);
-    pokemonCardBack.appendChild(pokemonCategory);
-    pokemonCardBack.appendChild(weakTypeContainer);
-    card.appendChild(pokemonCardFront);
-    card.appendChild(pokemonCardBack);
-    cardContainer.appendChild(card);
-    container.appendChild(cardContainer);
+    const categoryTitle = document.createElement('span');
+    const heightTitle = document.createElement('span');
+    const weightTitle = document.createElement('span');
+    const abilitiesTitle = document.createElement('span');
+    const weaknessTitle = document.createElement('span');
+    const evolutionTitle = document.createElement('span');
+
+    categoryTitle.classList.add('categoryTitle');
+    heightTitle.classList.add('heightTitle');
+    weightTitle.classList.add('weightTitle');
+    abilitiesTitle.classList.add('abilitiesTitle');
+    weaknessTitle.classList.add('weaknessTitle');
+    evolutionTitle.classList.add('evolutionTitle');
+
+    categoryTitle.innerText = 'Category';
+    heightTitle.innerText = 'Height';
+    weightTitle.innerText = 'Weight';
+    abilitiesTitle.innerText = 'Abilities';
+    weaknessTitle.innerText = 'Weakness';
+    evolutionTitle.innerText = 'Evolution';
+
+    const categoryTitleContainer = document.createElement('div');
+    categoryTitleContainer.classList.add('categoryTitleContainer');
+    categoryTitleContainer.append(categoryTitle, pokemonCategory);
+
+    const heightTitleContainer = document.createElement('div');
+    heightTitleContainer.classList.add('heightTitleContainer');
+    heightTitleContainer.append(heightTitle, pokemonHeight);
+
+    const weightTitleContainer = document.createElement('div');
+    weightTitleContainer.classList.add('weightTitleContainer');
+
+    const abilitiesTitleContainer = document.createElement('div');
+    abilitiesTitleContainer.classList.add('abilitiesTitleContainer');
+
+
+    // appended front components go here
+    pokemonCardFront.append(pokemonId);
+    pokemonCardFront.append(pokemonImg);
+    pokemonCardFront.append(pokemonName);
+    pokemonCardFront.append(pokemonType1);
+    pokemonCardFront.append(pokemonType2);
+    // appended back components go here
+    pokemonCardBack.append(categoryTitleContainer)
+    pokemonCardBack.append(heightTitleContainer)
+    pokemonCardBack.append(weaknessTitle)
+    pokemonCardBack.append(weakTypeContainer);
+    // appended cards
+    card.append(pokemonCardFront);
+    card.append(pokemonCardBack);
+    cardContainer.append(card);
+    container.append(cardContainer);
     // event handler 
     card.addEventListener('click', flipCard)
     window.addEventListener('scroll', () => {
