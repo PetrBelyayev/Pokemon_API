@@ -35,7 +35,7 @@ const getPokemon = async (id) => {
 
 
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 151; i++) {
+    for(let i = 150; i <= 151; i++) {
         await getPokemon(i);
     }
 }
@@ -120,21 +120,9 @@ const makePokemonCard = (res, res2, res3) => {
     const evoContainer = document.createElement('div');
     evoContainer.classList.add('evoContainer')
 
-    // maxEvo.forEach(function (maxEvo) {
-    //     if (evoChain.length > 1) {
-    //     let evoImage = document.createElement('img');
-    //     evoImage.src = `${baseURL}${baseModifier(maxEvo)}.png`;
-    //     evoImage.classList.add('evoImage');
-    //     evoImage.style.border = `1px solid var(--${type1}`
-    //     evoContainer.append(evoImage)
-    //     console.log(maxEvo)
-
-    //     }
-    // })
-
     let evoData = res3.chain;
     let evoChain = []
-    
+
     do {
         let numberOfEvolutions = evoData['evolves_to'].length;
         
@@ -142,14 +130,17 @@ const makePokemonCard = (res, res2, res3) => {
         if(numberOfEvolutions > 1) {
             for (let i = 1; i < numberOfEvolutions; i++) {
                 evoChain.push(evoData.evolves_to[i].species.url.slice(42, -1));
-                console.log(evoChain)
             }
           }
+          
         evoData = evoData['evolves_to'][0];
     } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
-    let maxEvo = evoChain.filter(n => n < 151);
+    let maxEvo = evoChain.filter(n => n <= 151);
 
     for (let i = 0; i < maxEvo.length; i++) {
+        if (maxEvo.includes(`${res.id}`) & maxEvo.length > 3) {
+            maxEvo.shift(`${res.id}`)
+        }
         
         if (maxEvo.length > 1) {
             let evoImage = document.createElement('img');
@@ -157,6 +148,10 @@ const makePokemonCard = (res, res2, res3) => {
             evoImage.classList.add('evoImage');
             evoImage.style.border = `1px solid var(--${type1}`
             evoContainer.append(evoImage)
+            } else {
+                const noEvo = document.createElement('span')
+                noEvo.innerText = "This pokemon does not evolve"
+                evoContainer.append(noEvo)
             }
         
     }
