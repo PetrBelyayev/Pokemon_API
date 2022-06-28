@@ -7,28 +7,49 @@ const baseURL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/'
 let baseModifier = (number) => (number <= 999 ? `00${number}` .slice(-3): number);
 // pokemon api
 
+
 const getPokemon = async (id) => {
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const pokemonSpeciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
     const res = await axios.get(pokemonDataUrl);
     const res2 = await axios.get(pokemonSpeciesUrl);
     
-    
     const pokemonEvolution = res2.data.evolution_chain.url
+
     const res3 = await axios.get(`${pokemonEvolution}`);
-    console.log(res3.data)
     makePokemonCard(res.data, res2.data, res3.data)
+    // first poke
+    // console.log(res3.data.chain.species.name)
+    // second poke
+    // console.log(res3.data.chain.evolves_to[0].species.name)
+    // third poke
+    // console.log(res3.data.chain.evolves_to[0].evolves_to[0].species.name)
+    
+    
+    
+  
+    
 };
 
+
+
+
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 3; i++) {
+    for(let i = 1; i <= 151; i++) {
         await getPokemon(i);
     }
 }
-
 fetchPokemons()
+// getPokemon(1)
+// getPokemon(113)
+// getPokemon(151)
 
-const makePokemonCard = (res, res2) => {
+
+const makePokemonCard = (res, res2, res3) => {
+    
+
+    
+
     // pokemon card front and back
     const cardContainer = document.createElement('div');
     cardContainer.classList.add('cardContainer');
@@ -61,6 +82,7 @@ const makePokemonCard = (res, res2) => {
     pokemonType2.style.background = `var(--${type2})`
     pokemonType2.innerText = type2;
     }
+    // pokemon image
     const pokemonImg = document.createElement('img');
     pokemonImg.src = `${baseURL}${baseModifier(res.id)}.png`
     pokemonImg.classList.add('pokemonImg')
@@ -76,63 +98,95 @@ const makePokemonCard = (res, res2) => {
     // pokemon height with conversion
     let decimeterToFeet = (res.height/3.048)
     let pokemonTotalHeight = Math.floor(decimeterToFeet) + "'" + Math.round((12 * (decimeterToFeet - Math.floor(decimeterToFeet)))) +'"';
-    const pokemonHeight = document.createElement('span');
-    pokemonHeight.classList.add('pokemonHeight');
-    pokemonHeight.innerText = pokemonTotalHeight;
-    // pokemon species category
-    const pokemonCategory = document.createElement('span');
-    pokemonCategory.classList.add('pokemonCategory');
-    pokemonCategory.innerText = res2.genera[7].genus.replace('Pokémon', '');
+
+    const pokemonCategory = res2.genera[7].genus.replace('Pokémon', '');
+
     // pokemon weakness
-    
     allWeakness
     const weakTypeContainer = document.createElement('div');
     weakTypeContainer.classList.add('weakTypeContainer');
     let hasWeakType = allWeakness[type1]
 
     hasWeakType.forEach(function (hasWeakType) {
+        
         let weakTypeLabel = document.createElement('span')
         weakTypeLabel.innerHTML = hasWeakType
         weakTypeLabel.classList.add(`pokemonType${hasWeakType}`)
         weakTypeLabel.style.background = `var(--${hasWeakType})`
         weakTypeContainer.append(weakTypeLabel)
+
     })
 
-    const categoryTitle = document.createElement('span');
-    const heightTitle = document.createElement('span');
-    const weightTitle = document.createElement('span');
-    const abilitiesTitle = document.createElement('span');
-    const weaknessTitle = document.createElement('span');
-    const evolutionTitle = document.createElement('span');
+    const evoContainer = document.createElement('div');
+    evoContainer.classList.add('evoContainer')
 
-    categoryTitle.classList.add('categoryTitle');
-    heightTitle.classList.add('heightTitle');
-    weightTitle.classList.add('weightTitle');
-    abilitiesTitle.classList.add('abilitiesTitle');
-    weaknessTitle.classList.add('weaknessTitle');
-    evolutionTitle.classList.add('evolutionTitle');
+    // maxEvo.forEach(function (maxEvo) {
+    //     if (evoChain.length > 1) {
+    //     let evoImage = document.createElement('img');
+    //     evoImage.src = `${baseURL}${baseModifier(maxEvo)}.png`;
+    //     evoImage.classList.add('evoImage');
+    //     evoImage.style.border = `1px solid var(--${type1}`
+    //     evoContainer.append(evoImage)
+    //     console.log(maxEvo)
 
-    categoryTitle.innerText = 'Category';
-    heightTitle.innerText = 'Height';
-    weightTitle.innerText = 'Weight';
-    abilitiesTitle.innerText = 'Abilities';
-    weaknessTitle.innerText = 'Weakness';
-    evolutionTitle.innerText = 'Evolution';
+    //     }
+    // })
 
-    const categoryTitleContainer = document.createElement('div');
-    categoryTitleContainer.classList.add('categoryTitleContainer');
-    categoryTitleContainer.append(categoryTitle, pokemonCategory);
+    let evoData = res3.chain;
+    let evoChain = []
+    
+    do {
+        let numberOfEvolutions = evoData['evolves_to'].length;
+        
+        evoChain.push(evoData.species.url.slice(42, -1));
+        if(numberOfEvolutions > 1) {
+            for (let i = 1; i < numberOfEvolutions; i++) {
+                evoChain.push(evoData.evolves_to[i].species.url.slice(42, -1));
+                console.log(evoChain)
+            }
+          }
+        evoData = evoData['evolves_to'][0];
+    } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
+    let maxEvo = evoChain.filter(n => n < 151);
 
-    const heightTitleContainer = document.createElement('div');
-    heightTitleContainer.classList.add('heightTitleContainer');
-    heightTitleContainer.append(heightTitle, pokemonHeight);
+    for (let i = 0; i < maxEvo.length; i++) {
+        
+        if (maxEvo.length > 1) {
+            let evoImage = document.createElement('img');
+            evoImage.src = `${baseURL}${baseModifier(maxEvo[i])}.png`;
+            evoImage.classList.add('evoImage');
+            evoImage.style.border = `1px solid var(--${type1}`
+            evoContainer.append(evoImage)
+            }
+        
+    }
+    
 
-    const weightTitleContainer = document.createElement('div');
-    weightTitleContainer.classList.add('weightTitleContainer');
+    const category = document.createElement('span');
+    const height = document.createElement('span');
+    const weight = document.createElement('span');
+    const abilities = document.createElement('span');
+    const weakness = document.createElement('span');
+    const evolution = document.createElement('span');
 
-    const abilitiesTitleContainer = document.createElement('div');
-    abilitiesTitleContainer.classList.add('abilitiesTitleContainer');
+    category.classList.add('discriptor');
+    height.classList.add('discriptor');
 
+    category.innerText = `Category: ${pokemonCategory}`;
+    height.innerText = `Height: ${pokemonTotalHeight}`;
+    weight.innerText = 'Weight: 15lbs';
+    abilities.innerText = 'Abilities: Overgrow';
+    weakness.innerText = 'Weakness';
+    evolution.innerText = 'Evolution';
+
+    const discriptorContainer1 = document.createElement('div');
+    const discriptorContainer2 = document.createElement('div');
+    discriptorContainer1.classList.add('discriptorContainer');
+    discriptorContainer2.classList.add('discriptorContainer');
+
+
+    discriptorContainer1.append(category, height)
+    discriptorContainer2.append(abilities, weight)
 
     // appended front components go here
     pokemonCardFront.append(pokemonId);
@@ -141,10 +195,11 @@ const makePokemonCard = (res, res2) => {
     pokemonCardFront.append(pokemonType1);
     pokemonCardFront.append(pokemonType2);
     // appended back components go here
-    pokemonCardBack.append(categoryTitleContainer)
-    pokemonCardBack.append(heightTitleContainer)
-    pokemonCardBack.append(weaknessTitle)
+    pokemonCardBack.append(discriptorContainer1);
+    pokemonCardBack.append(discriptorContainer2);
+    pokemonCardBack.append(weakness);
     pokemonCardBack.append(weakTypeContainer);
+    pokemonCardBack.append(evoContainer)
     // appended cards
     card.append(pokemonCardFront);
     card.append(pokemonCardBack);

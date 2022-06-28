@@ -101,7 +101,7 @@ h1 {
     display: block;
     font-size: 20px;
     font-weight: 400;
-    margin-left: 33px;
+    margin-left: 22px;
 }
 
 .weakTypeContainer {
@@ -117,7 +117,7 @@ h1 {
     line-height: 20px;
     color: white;
     text-align: center;
-    margin: 5px -25px 5px 32px;
+    margin: 5px 4px 5px 22px;
 }
 
 .pokemonTypeGround, .pokemonTypeFlying, .pokemonTypeDragon {
@@ -126,8 +126,8 @@ h1 {
 
 
 .categoryTitleContainer {
-    margin-left: 32px;
-    border: red solid 1px;
+    margin-top: 20px;
+    display: inline-flex;
     text-align: left;
     font-size: 14px;
 
@@ -135,23 +135,24 @@ h1 {
 
 .categoryTitle {
     font-weight: 600;
+    margin-right: 5px;
 }
 
 .heightTitle {
     font-weight: 600;
+    margin-right: 5px;
 }
 
 .heightTitleContainer {
-    margin-left: 32px;
-    border: red solid 1px;
+    display: inline-flex;
+    margin-left: 22px;
     text-align: left;
     font-size: 14px;
 }
 
 .weaknessTitle {
     display: block;
-    margin-left: 32px;
-    border: red solid 1px;
+    margin: 20px 0 10px 22px;
     text-align: left;
     font-size: 14px;
     font-weight: 600;
@@ -181,4 +182,18 @@ h1 {
         }
         
     }
+}
+
+.evoContainer {
+    display: flex;
+    margin: 0 auto;
+}
+
+.evoImage {
+    display: block;
+    width: 74px;
+    text-align: center;
+    margin: 0 auto;
+
+    border-radius: 50px;
 }
