@@ -27,15 +27,6 @@ body {
     background-color: rgb(251, 251, 251);
 }
 
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    font-size: 4rem;
-    font-weight: 100;
-    color: grey;
-}
-
 #container {
     display: flex;
     flex-wrap: wrap;
@@ -104,10 +95,6 @@ h1 {
     margin-left: 22px;
 }
 
-.weakTypeContainer {
-    text-align: left;
-}
-
 .pokemonTypeGrass, .pokemonTypePoison, .pokemonTypeFire, .pokemonTypeGround, .pokemonTypeIce, .pokemonTypeElectric, .pokemonTypeFlying, .pokemonTypeFighting, .pokemonTypeNormal,.pokemonTypeWater, .pokemonTypeBug, .pokemonTypeFairy, .pokemonTypeDark, .pokemonTypeDragon, .pokemonTypeSteel, .pokemonTypePsychic, .pokemonTypeRock, .pokemonTypeGhost {
     display: inline-block;
     font-size: 12px;
@@ -117,45 +104,70 @@ h1 {
     line-height: 20px;
     color: white;
     text-align: center;
-    margin: 5px 4px 5px 22px;
+    margin: 5px 4px 0 22px;
 }
 
 .pokemonTypeGround, .pokemonTypeFlying, .pokemonTypeDragon {
     color: black;
 }
 
-
-.categoryTitleContainer {
-    margin-top: 20px;
-    display: inline-flex;
+.discriptorWeakness {
+    font-size: 13.5px;
+    word-spacing: 10px;
+}
+.weakTypeContainer {
     text-align: left;
-    font-size: 14px;
-
 }
 
-.categoryTitle {
-    font-weight: 600;
-    margin-right: 5px;
-}
-
-.heightTitle {
-    font-weight: 600;
-    margin-right: 5px;
-}
-
-.heightTitleContainer {
-    display: inline-flex;
-    margin-left: 22px;
-    text-align: left;
-    font-size: 14px;
-}
-
-.weaknessTitle {
+.discriptor {
     display: block;
-    margin: 20px 0 10px 22px;
+    font-size: 13.5px;
     text-align: left;
-    font-size: 14px;
-    font-weight: 600;
+    margin: 5px 0 5px 22px;
+}
+
+
+.discriptorContainer {
+    margin: 20px 0 0px 0;
+}
+
+
+.evoImagesContainer {
+    display: flex;
+    position: absolute;
+    top: 68%;
+    width: 100%;
+    justify-content: center;
+}
+
+.evoNamesContainer {
+    display: flex;
+    position: absolute;
+    top: 91%;
+    width: 100%;
+}
+
+.evoImage {
+    display: flex;
+    width: 73px;
+    border-radius: 50px;
+    margin: 0 auto;
+    /* border: lightgray solid 1px; */
+
+}
+
+.evoNames {
+    font-size: 13.5px;
+    width: 100px;
+    margin: 0 auto;
+}
+
+
+
+.noEvo {
+    font-size: 12px;
+    font-style: italic;
+    margin: 0 auto;
 }
 
 @media screen and (min-width: 800px) {
@@ -180,20 +192,5 @@ h1 {
         90% {
             transform: translateY(-4px);
         }
-        
     }
-}
-
-.evoContainer {
-    display: flex;
-    margin: 0 auto;
-}
-
-.evoImage {
-    display: block;
-    width: 74px;
-    text-align: center;
-    margin: 0 auto;
-
-    border-radius: 50px;
 }

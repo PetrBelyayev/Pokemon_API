@@ -13,9 +13,15 @@ export let allWeakness = {
         Poison: ['Ground', 'Psychic'],
         Fighting: ['Psychic', 'Fairy', 'Flying'],
         Grass: ['Fire', 'Ice', 'Bug', 'Poison', 'Flying'],
-        Ice: ['Fire', 'FIghting', 'Rock', 'Steel'],
+        Ice: ['Fire', 'Fighting', 'Rock', 'Steel'],
         Normal: ['Fighting'],
         Electric: ['Ground'],
         Fire: ['Rock', 'Ground', 'Water'],
         Water: ['Grass', 'Electric'],
     };
+
+    function removeLetters(word) {
+        if(word.includes('-')) {
+            return word.slice(-2)
+        }
+    }
