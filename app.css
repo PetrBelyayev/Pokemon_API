@@ -152,8 +152,7 @@ body {
     width: 73px;
     border-radius: 50px;
     margin: 0 auto;
-    /* border: lightgray solid 1px; */
-
+    border: gray solid 1px;
 }
 
 .evoNames {
@@ -168,6 +167,32 @@ body {
     font-size: 12px;
     font-style: italic;
     margin: 0 auto;
+}
+
+.arrowContainer {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    top: 76%;
+    justify-content: flex-start;
+}
+
+.arrow {
+    display: inline-flex;
+    margin-left: 13.5px;
+    margin-right: -2.5px;
+    width: 73px;
+    justify-content: flex-end;
+}
+
+/* .singleArrow {
+    color: red;
+} */
+
+.singleArrowContainer {
+    position: absolute;
+    width: 100%;
+    top: 76%;
 }
 
 @media screen and (min-width: 800px) {

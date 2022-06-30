@@ -18,16 +18,16 @@ const getPokemon = async (id) => {
     // console.log(res.data.weight)
 };
 
-const fetchPokemons = async () => {
-    for(let i = 1; i <= 151; i++) {
-        await getPokemon(i);
-    }
-}
-fetchPokemons()
-// getPokemon(70)
-// getPokemon(23)
-// getPokemon(151)
-// getPokemon(133)
+// const fetchPokemons = async () => {
+//     for(let i = 1; i <= 151; i++) {
+//         await getPokemon(i);
+//     }
+// }
+// fetchPokemons()
+getPokemon(70)
+getPokemon(23)
+getPokemon(151)
+getPokemon(133)
 
 function nameModifier (word) {
     return word[0].toUpperCase() + word.slice(1).replace(/([-])\w/, '')
@@ -154,6 +154,25 @@ const makePokemonCard = (res, res2, res3) => {
                 evoNamesContainer.append(noEvo)
             }
     }
+
+    // arrow
+    const arrowContainer = document.createElement('div');
+    arrowContainer.classList.add('arrowContainer');
+    const singleArrowContainer = document.createElement('div');
+    singleArrowContainer.classList.add('singleArrowContainer');
+
+    for (let i = 1; i < maxEvo.length; i++) {
+        if (maxEvo.length === 3) {
+        const arrow = document.createElement('span');
+        arrow.classList.add('arrow')
+        arrow.innerHTML = "&#9656"
+        arrowContainer.append(arrow)
+        } else {
+            const arrow = document.createElement('span');
+            arrow.innerHTML = "&#9656"
+            singleArrowContainer.append(arrow)
+        }
+    }
     
 
     const category = document.createElement('span');
@@ -191,6 +210,8 @@ const makePokemonCard = (res, res2, res3) => {
     pokemonCardBack.append(discriptorContainer);
     pokemonCardBack.append(weakness);
     pokemonCardBack.append(weakTypeContainer);
+    pokemonCardBack.append(arrowContainer);
+    pokemonCardBack.append(singleArrowContainer);
     pokemonCardBack.append(evoImagesContainer);
     pokemonCardBack.append(evoNamesContainer);
 
