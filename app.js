@@ -221,11 +221,25 @@ const makePokemonCard = (res, res2, res3) => {
     cardContainer.append(card);
     container.append(cardContainer);
     // event handler 
-    card.addEventListener('click', flipCard)
+    let selectedCard;
+    container.onclick = function(event) {
+    let target = event.target;
+        while (target != this) {
+            if (target.classList == 'card') {
+                flipCard(target);
+                return;
+            }
+        target = target.parentNode;
+        }
+    }
+    function flipCard(node) {
+        if (selectedCard) {
+            selectedCard.classList.remove('flipCard');
+        }
+        selectedCard = node;
+        selectedCard.classList.add('flipCard');
+    }
     window.addEventListener('scroll', () => {
         card.classList.remove('flipCard')
     })
-    function flipCard() {
-        card.classList.toggle('flipCard')
-    }
 }

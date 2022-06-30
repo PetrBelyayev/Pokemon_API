@@ -152,7 +152,7 @@ body {
     width: 73px;
     border-radius: 50px;
     margin: 0 auto;
-    border: gray solid 1px;
+    border: var(--Normal) solid 1px;
 }
 
 .evoNames {
@@ -175,6 +175,7 @@ body {
     width: 100%;
     top: 76%;
     justify-content: flex-start;
+    color: var(--Normal);
 }
 
 .arrow {
@@ -185,11 +186,8 @@ body {
     justify-content: flex-end;
 }
 
-/* .singleArrow {
-    color: red;
-} */
-
 .singleArrowContainer {
+    color: var(--Normal);
     position: absolute;
     width: 100%;
     top: 76%;
