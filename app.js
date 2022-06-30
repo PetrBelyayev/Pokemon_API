@@ -18,16 +18,16 @@ const getPokemon = async (id) => {
     // console.log(res.data.weight)
 };
 
-// const fetchPokemons = async () => {
-//     for(let i = 1; i <= 151; i++) {
-//         await getPokemon(i);
-//     }
-// }
-// fetchPokemons()
-getPokemon(70)
-getPokemon(23)
-getPokemon(151)
-getPokemon(133)
+const fetchPokemons = async () => {
+    for(let i = 1; i <= 151; i++) {
+        await getPokemon(i);
+    }
+}
+fetchPokemons()
+// getPokemon(70)
+// getPokemon(23)
+// getPokemon(151)
+// getPokemon(133)
 
 function nameModifier (word) {
     return word[0].toUpperCase() + word.slice(1).replace(/([-])\w/, '')
