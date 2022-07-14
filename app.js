@@ -19,8 +19,9 @@ const getPokemon = async (id) => {
 };
 
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 151; i++) {
+    for(let i = 1; i <= 810; i++) {
         await getPokemon(i);
+
     }
 }
 fetchPokemons()
@@ -49,7 +50,7 @@ const makePokemonCard = (res, res2, res3) => {
     const pokemonName = document.createElement('span');
     pokemonName.classList.add('pokemonName')
     pokemonName.innerText = name;
-    // pokemon id
+    // pokemon id  
     const pokemonId= document.createElement('span');
     pokemonId.classList.add('pokemonId')
     pokemonId.innerText = `#${baseModifier(res.id)}`;
@@ -129,7 +130,7 @@ const makePokemonCard = (res, res2, res3) => {
           }
         evoData = evoData['evolves_to'][0];
     } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
-    let maxEvo = evoChain.filter(n => n <= 151);
+    let maxEvo = evoChain.filter(n => n <= 800);
 // checks if evolution chain has more than 3 (gen1 eevee has 4), remove the current selected pokemon from the chain to make room for the remaining 3 pokemone in the chain(aesthetic)
     for (let i = 0; i < maxEvo.length; i++) {
         if (maxEvo.includes(`${res.id}`) & maxEvo.length > 3) {
@@ -169,7 +170,7 @@ const makePokemonCard = (res, res2, res3) => {
         arrowContainer.append(arrow)
         } else {
             const arrow = document.createElement('span');
-            arrow.innerHTML = "&#9656"
+            arrow.innerHTML = "&#9658"
             singleArrowContainer.append(arrow)
         }
     }
@@ -242,4 +243,15 @@ const makePokemonCard = (res, res2, res3) => {
     window.addEventListener('scroll', () => {
         card.classList.remove('flipCard')
     })
+}
+
+window.onblur=function(){
+    //change favicon
+    const pokeCall = ['Pika!', 'Bulbasaur!', 'Charmander!', 'Squirtle!']
+    let randomCall = pokeCall[Math.floor(Math.random()*pokeCall.length)];
+    document.title = (randomCall);
+}
+
+window.onfocus=function(){
+    document.title="Pokemon API";
 }
