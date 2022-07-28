@@ -19,7 +19,7 @@ const getPokemon = async (id) => {
 };
 
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 810; i++) {
+    for(let i = 1; i <= 150; i++) {
         await getPokemon(i);
 
     }
@@ -130,7 +130,7 @@ const makePokemonCard = (res, res2, res3) => {
           }
         evoData = evoData['evolves_to'][0];
     } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
-    let maxEvo = evoChain.filter(n => n <= 800);
+    let maxEvo = evoChain.filter(n => n <= 150);
 // checks if evolution chain has more than 3 (gen1 eevee has 4), remove the current selected pokemon from the chain to make room for the remaining 3 pokemone in the chain(aesthetic)
     for (let i = 0; i < maxEvo.length; i++) {
         if (maxEvo.includes(`${res.id}`) & maxEvo.length > 3) {

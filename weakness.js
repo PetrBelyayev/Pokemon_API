@@ -19,9 +19,3 @@ export let allWeakness = {
         Fire: ['Rock', 'Ground', 'Water'],
         Water: ['Grass', 'Electric'],
     };
-
-    function removeLetters(word) {
-        if(word.includes('-')) {
-            return word.slice(-2)
-        }
-    }
