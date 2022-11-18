@@ -15,11 +15,11 @@ const getPokemon = async (id) => {
     const pokemonEvolution = res2.data.evolution_chain.url
     const res3 = await axios.get(`${pokemonEvolution}`);
     makePokemonCard(res.data, res2.data, res3.data)
-    // console.log(res.data.weight)
+    console.log(res)
 };
 
 const fetchPokemons = async () => {
-    for(let i = 1; i <= 150; i++) {
+    for(let i = 1; i <= 905; i++) {
         await getPokemon(i);
 
     }
@@ -62,6 +62,8 @@ const makePokemonCard = (res, res2, res3) => {
     pokemonType1.style.background = `var(--${type1})`;
     // if pokemon has a second type then append that type
     const pokemonType2 = document.createElement('span');
+
+    
     if(res.types[1]) {
     const type2 = nameModifier(res.types[1].type.name);
     pokemonType2.classList.add(`pokemonType${type2}`)
@@ -92,7 +94,7 @@ const makePokemonCard = (res, res2, res3) => {
     const pokemonCategory = nameModifier(res2.genera[7].genus.replace('Pokémon', ''));
     const pokemonAbilities = nameModifier(res.abilities[0].ability.name);
     const pokemonWeight = (res.weight/4.536).toFixed(1);
-    let pokemonHeight = convertToFeet(res);
+    const pokemonHeight = convertToFeet(res);
 
     // pokemon weakness
     allWeakness
@@ -130,7 +132,7 @@ const makePokemonCard = (res, res2, res3) => {
           }
         evoData = evoData['evolves_to'][0];
     } while (!!evoData && evoData.hasOwnProperty('evolves_to'));
-    let maxEvo = evoChain.filter(n => n <= 150);
+    let maxEvo = evoChain.filter(n => n <= 905);
 // checks if evolution chain has more than 3 (gen1 eevee has 4), remove the current selected pokemon from the chain to make room for the remaining 3 pokemone in the chain(aesthetic)
     for (let i = 0; i < maxEvo.length; i++) {
         if (maxEvo.includes(`${res.id}`) & maxEvo.length > 3) {
@@ -248,7 +250,10 @@ const makePokemonCard = (res, res2, res3) => {
 window.onblur=function(){
     //change favicon
     const pokeCall = ['Pika!', 'Bulbasaur!', 'Charmander!', 'Squirtle!']
+    // const pokeCall = ['Check out my music!', 'The song just started!', 'This beat slaps!', 'Where did you go!']
+    
     let randomCall = pokeCall[Math.floor(Math.random()*pokeCall.length)];
+
     document.title = (randomCall);
 }
 
